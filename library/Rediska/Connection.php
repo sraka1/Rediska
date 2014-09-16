@@ -12,6 +12,7 @@
  */
 class Rediska_Connection extends Rediska_Options
 {
+    const DEFAULT_PROTOCOL = 'tcp';
     const DEFAULT_HOST = '127.0.0.1';
     const DEFAULT_PORT = 6379;
     const DEFAULT_WEIGHT = 1;
@@ -41,6 +42,7 @@ class Rediska_Connection extends Rediska_Options
      * @var array
      */
     protected $_options = array(
+        'protocol' => self::DEFAULT_PROTOCOL
         'host' => self::DEFAULT_HOST,
         'port' => self::DEFAULT_PORT,
         'db' => self::DEFAULT_DB,
@@ -64,7 +66,7 @@ class Rediska_Connection extends Rediska_Options
     public function connect()
     {
         if (!$this->isConnected()) {
-            $socketAddress = 'tcp://' . $this->getHost() . ':' . $this->getPort();
+            $socketAddress = $this->getProtocol() . '://' . $this->getHost() . ':' . $this->getPort();
 
             if ($this->_options['persistent']) {
                 $flag = STREAM_CLIENT_PERSISTENT | STREAM_CLIENT_CONNECT;
@@ -291,6 +293,16 @@ class Rediska_Connection extends Rediska_Options
         }
 
         return $this;
+    }
+
+    /**
+     * Get option protocol
+     * 
+     * @return string
+     */
+    public function getProtocol()
+    {
+        return $this->_options['protocol'];
     }
 
     /**
