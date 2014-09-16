@@ -42,7 +42,7 @@ class Rediska_Connection extends Rediska_Options
      * @var array
      */
     protected $_options = array(
-        'protocol' => self::DEFAULT_PROTOCOL
+        'protocol' => self::DEFAULT_PROTOCOL,
         'host' => self::DEFAULT_HOST,
         'port' => self::DEFAULT_PORT,
         'db' => self::DEFAULT_DB,
